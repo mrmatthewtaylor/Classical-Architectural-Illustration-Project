@@ -46,6 +46,33 @@ nav a:hover {
     color: #000000;
 }
 
+@media (max-width: 600px) {
+    header {
+        flex-direction: column; /* Stacks your name on top of the navigation */
+        gap: 15px;              /* Adds clean spacing between name and links */
+        padding: 15px 5%;       /* Adjusts side padding for mobile viewports */
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;              /* Spreads out the nav links evenly */
+    }
+
+    nav a {
+        margin-left: 0;         /* Clears out the desktop left-margin */
+        font-size: 0.9rem;      /* Slight scale down for compact screens */
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;     /* Reduced main title size on mobile */
+    }
+    
+    .hero p {
+        font-size: 1.05rem;     /* Reduced tagline size on mobile */
+    }
+}
+
 /* Hero Section */
 .hero {
     text-align: center;
