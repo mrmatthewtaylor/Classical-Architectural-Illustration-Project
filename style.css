@@ -217,11 +217,20 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
+/* Base styles for desktop and larger screens */
 .about-section p {
-    font-size: 1.12rem;
+    font-size: 1.1rem;
     line-height: 1.75;
     color: #ced4da;
     margin-bottom: 16px;
+}
+
+/* Styles for mobile screens (devices up to 768px wide) */
+@media (max-width: 768px) {
+    .about-section p {
+        font-size: 0.9rem; /* Reduced font size for mobile */
+        line-height: 1.6;   /* Slightly tighter line-height for smaller screens */
+    }
 }
 
 .about-section strong {
