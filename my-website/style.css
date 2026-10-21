@@ -1,0 +1,317 @@
+/* General Resets */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    
+    /* Set path to your muted background image */
+    background-image: url('images/bg-img1.jpg'); 
+    background-repeat: repeat;       /* Tiles the pattern seamlessly across the page */
+    background-position: center top; /* Centers the pattern starting from the top */
+    background-attachment: fixed;   /* Keeps the pattern stationary while scrolling */
+    
+    color: #212529;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+/* Header & Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.logo {
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+nav a:hover {
+    color: #000000;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column; /* Stacks your name on top of the navigation */
+        gap: 15px;              /* Adds clean spacing between name and links */
+        padding: 15px 5%;       /* Adjusts side padding for mobile viewports */
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;              /* Spreads out the nav links evenly */
+    }
+
+    nav a {
+        margin-left: 0;         /* Clears out the desktop left-margin */
+        font-size: 0.9rem;      /* Slight scale down for compact screens */
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;     /* Reduced main title size on mobile */
+    }
+    
+    .hero p {
+        font-size: 1.05rem;     /* Reduced tagline size on mobile */
+    }
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 20px 10px 30px 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+
+.hero p {
+    font-size: 1.25rem;
+    color: #6c757d;
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 1.75rem; /* Reduced main title size */
+    }
+    
+    .hero p {
+        font-size: 1rem; /* Reduced tagline size for mobile screens */
+    }
+}
+
+/* Projects Section */
+.projects {
+    padding: 30px 8% 8% 8%;
+    border-top: 1px solid #e9ecef;
+   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.projects h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+}
+
+.project-card h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #212529;
+    margin-bottom: 5px;
+}
+
+.project-card p {
+    color: #6c757d;
+    font-size: 0.98rem;
+}
+
+/* Responsive Image Styling */
+.project-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain; 
+    background-color: #ffffff; 
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    box-sizing: border-box;
+}
+
+.project-img:hover {
+    transform: scale(1.02);
+}
+
+@media (min-width: 992px) {
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+        gap: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-grid {
+        grid-template-columns: 1fr; 
+        gap: 20px;
+    }
+
+    .project-card {
+        width: 100%;
+        box-sizing: border-box; 
+    }
+
+    .project-img {
+        aspect-ratio: 16 / 10; 
+    }
+}
+
+/* About Section */
+.about-section {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 35px;
+    background-color: rgba(10, 25, 47, 0.85); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+ 
+}
+
+.about-section h2 {
+    font-size: 1.7rem;
+    color: #f8f9fa;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.about-lead {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #e9ecef;
+    margin-bottom: 20px;
+}
+
+.about-section p {
+    font-size: 1.12rem;
+    line-height: 1.75;
+    color: #ced4da;
+    margin-bottom: 16px;
+}
+
+.about-section strong {
+    color: #ffffff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #6c757d;
+    font-size: 0.85rem;
+    background-color: #ffffff;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-img {
+    max-width: 90vw;  
+    max-height: 80vh; 
+    object-fit: contain;
+}
+
+#lightbox-title {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 1001;
+}
+
+.close-btn:hover {
+    color: #adb5bd;
+}
+
+/* Lightbox Navigation Arrows */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    padding: 20px;
+    user-select: none;
+    transition: color 0.2s;
+    z-index: 1001;
+}
+
+.nav-btn:hover {
+    color: #adb5bd;
+}
+
+.prev-btn {
+    left: 30px;
+}
+
+.next-btn {
+    right: 30px;
+}
