@@ -85,3 +85,46 @@ document.addEventListener('keydown', (e) => {
         showImage(currentIndex - 1);
     }
 });
+
+// Contact Modal Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const contactModal = document.getElementById('contact-modal');
+    const contactLink = document.getElementById('contact-link');
+    const footerContactLink = document.getElementById('footer-contact-link');
+    const closeBtn = document.querySelector('.contact-close-btn');
+
+    function openContactModal(e) {
+        if (e) e.preventDefault();
+        contactModal.classList.add('active');
+    }
+
+    function closeContactModal() {
+        contactModal.classList.remove('active');
+    }
+
+    if (contactLink) {
+        contactLink.addEventListener('click', openContactModal);
+    }
+
+    if (footerContactLink) {
+        footerContactLink.addEventListener('click', openContactModal);
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeContactModal);
+    }
+
+    // Close modal when clicking outside the content box
+    window.addEventListener('click', (e) => {
+        if (e.target === contactModal) {
+            closeContactModal();
+        }
+    });
+
+    // Close modal on 'Escape' key press
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+            closeContactModal();
+        }
+    });
+});
