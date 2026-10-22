@@ -429,6 +429,7 @@ footer {
     right: 30px;
 }
 
+/* Hide navigation arrows on mobile screens (600px and under) */
 @media (max-width: 600px) {
     .nav-btn {
         display: none !important;
