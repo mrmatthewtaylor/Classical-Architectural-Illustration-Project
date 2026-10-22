@@ -1,26 +1,3 @@
-// Page Transition Effect on Link Clicks
-document.addEventListener('DOMContentLoaded', () => {
-    const internalLinks = document.querySelectorAll('a');
-
-    internalLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-
-            if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || this.target === '_blank') {
-                return;
-            }
-
-            if (href.endsWith('.html') || href.includes('.html#')) {
-                e.preventDefault();
-                document.body.classList.add('fade-out');
-                
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 400);
-            }
-        });
-    });
-});
 
 // Hamburger Navigation & Full Screen Overlay Toggle
 const hamburgerBtn = document.getElementById('hamburger-btn');

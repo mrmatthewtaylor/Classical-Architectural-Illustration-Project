@@ -274,6 +274,7 @@ nav a.active-link {
     border-radius: 2px;
     cursor: pointer;
     box-sizing: border-box;
+
 }
 
 @media (min-width: 992px) {
