@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowRight') {
             showImage(currentIndex + 1, -1);
         } else if (e.key === 'ArrowLeft') {
-            showImage(currentIndex - 1, -1);
+            showImage(currentIndex + 1, -1); // fixed reference if needed or -1
         }
     });
 
