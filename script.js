@@ -17,7 +17,6 @@ if (hamburgerBtn && navMenu) {
 
     hamburgerBtn.addEventListener('click', toggleNav);
 
-    // Close full-screen menu when clicking any nav link
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
             closeNav();
