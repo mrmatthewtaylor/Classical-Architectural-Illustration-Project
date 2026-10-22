@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Architectural Illustration</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <!-- <header>
+        <div class="logo"><a href="/" class="logo-link">MATTHEW TAYLOR</a></div> -->
+        
+        <!-- Hamburger Icon -->
+        <!-- <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button> -->
+
+        <!-- Full Screen Nav Overlay -->
+        <!-- <nav class="nav-menu" id="nav-menu">
+            <a href="/">Illustration</a>
+            <a href="gallery/" class="active-link">Gallery</a>
+            <a href="/#about">About</a>
+            <a href="#contact-modal" id="contact-link">Contact</a>
+        </nav>
+    </header> -->
+
+    <div id="header-container"></div>
+
+    <!-- Gallery Hero Section -->
+    <section class="hero">
+        <h1>Line Illustration Gallery</h1>
+        <p>Architectural Studies & Details</p>
+    </section>
+
+    <!-- Gallery Grid Section -->
+    <section class="gallery-section">
+        <div class="gallery-grid">
+
+            <div class="gallery-card">
+                <img src="../images/img30.jpeg" alt="Victorian Shopfront & Upper Fenestration Elevation" class="project-img">
+                <div class="gallery-card-info">
+                    <h3>Victorian Shopfront & Upper Fenestration Elevation</h3>
+                    <p>Commercial Vernacular Architecture, Ground-Floor Colonnade & Modillioned Roofline</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="../images/img31.jpeg" alt="Asymmetrical Classical Façade & Tower Composition" class="project-img">
+                <div class="gallery-card-info">
+                    <h3>Asymmetrical Classical Façade & Tower Composition</h3>
+                    <p>Pedimented Center Pavilion, Tower Arched Fenestration & Rusticated Entrance Bay</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="../images/img32.jpeg" alt="Victorian Commercial Façade with Grand Display Arch" class="project-img">
+                <div class="gallery-card-info">
+                    <h3>Victorian Commercial Façade with Grand Display Arch</h3>
+                    <p>Monumental Ground-Floor Archway, Fluted Pilasters & Balustraded Roofline</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="../images/img33.jpeg" alt="Neo-Classical Mansion with Triple Cupolas & Portico" class="project-img">
+                <div class="gallery-card-info">
+                    <h3>Neo-Classical Mansion with Triple Cupolas & Portico</h3>
+                    <p>Symmetrical Central Portico, Domed Corner Pavilions, Balustraded Roofline & Rusticated Basement</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="../images/img34.jpeg" alt="Multi-Tiered Classical Façade with Mansard Roof & Cupola" class="project-img">
+                <div class="gallery-card-info">
+                    <h3>Multi-Tiered Classical Façade with Mansard Roof & Cupola</h3>
+                    <p>Segmental Pedimented Ground-Floor Windows, Pilastered Bays, Balustraded Cornice & Tower Lantern</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="../images/img35.jpeg" alt="Architectural Details: The Window Series" class="project-img">
+                <div class="gallery-card-info">
+                    <h3>Architectural Details: The Window Series</h3>
+                    <p>Series of Architectural Window Elevations Featuring Triangular Pediments, Segmental Arches, Pilasters & Baluster Aprons</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Popup Modal -->
+    <div id="contact-modal" class="contact-modal">
+        <div class="contact-modal-content">
+            <span class="contact-close-btn">&times;</span>
+            <h2>Get in Touch</h2>
+            <p class="contact-subtitle">For commissions, inquiries, or collaboration opportunities:</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>Email:</strong>
+                    <a href="mailto:mrmatthewtaylor@protonmail.com">mrmatthewtaylor@protonmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>Location:</strong>
+                    <span>United Kingdom</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>&copy; 2026 Matthew Taylor. All rights reserved.</p>
+    </footer>
+    
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn">&times;</span>
+        <span class="nav-btn prev-btn">&#10094;</span>
+        <div class="lightbox-content">
+            <img class="lightbox-img" id="lightbox-img" alt="Enlarged project view">
+            <p id="lightbox-title"></p>
+        </div>
+        <span class="nav-btn next-btn">&#10095;</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">&#8679;</button>
+
+    <script src="../script.js"></script>
+
+</body>
+</html>
