@@ -17,7 +17,6 @@ body {
     
     color: #212529;
     
-    /* Page Transition Fade Effect */
     opacity: 1;
     transition: opacity 0.4s ease-in-out;
 }
@@ -300,14 +299,14 @@ nav a.active-link {
     }
 }
 
-/* Shared Full-Screen Modal Overlays (About & Contact matching Nav transition) */
+/* Shared Full-Screen Modal Overlays */
 .full-screen-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 2500; /* Placed above nav-menu (2000) so it covers seamlessly */
+    z-index: 2500;
     
     background-image: url('images/bg-img1.jpg');
     background-repeat: no-repeat;
@@ -393,7 +392,6 @@ nav a.active-link {
     color: #6c757d;
 }
 
-/* Specific Contact Modal Styles matching Plain Text design */
 .contact-subtitle {
     color: #6c757d;
     font-size: 1.1rem;
@@ -524,14 +522,12 @@ footer {
     right: 30px;
 }
 
-/* Hide navigation arrows on smaller screens */
 @media (max-width: 600px) {
     .nav-btn {
         display: none !important;
     }
 }
 
-/* Back to Top Button Styles */
 .back-to-top {
     position: fixed;
     bottom: 30px;

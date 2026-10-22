@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
-    // 1. REUSABLE HEADER INJECTION
+    // 1. REUSABLE HEADER INJECTION (AWARE OF PAGES)
     // ==========================================
     const headerContainer = document.getElementById('header-container');
     if (headerContainer) {
         const path = window.location.pathname;
-        const isGallery = path.includes('gallery') || path.includes('index.html');
+        const isGallery = path.includes('gallery');
         
-        const homePath = isGallery ? '../' : '/';
-        const galleryPath = isGallery ? '/' : 'gallery/';
+        const homePath = isGallery ? '../' : './';
+        const galleryPath = isGallery ? './' : 'gallery/';
         const aboutPath = '#about'; 
-        const contactPath = '#contact-modal';
+        const contactPath = '#contact';
 
         headerContainer.innerHTML = `
             <header>
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="${homePath}" class="${!isGallery ? 'active-link' : ''}">Illustration</a>
                     <a href="${galleryPath}" class="${isGallery ? 'active-link' : ''}">Gallery</a>
                     <a href="${aboutPath}" id="nav-about-link">About</a>
-                    <a href="${contactPath}" id="contact-link">Contact</a>
+                    <a href="${contactPath}" id="nav-contact-link">Contact</a>
                 </nav>
             </header>
         `;
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburgerBtn.addEventListener('click', toggleNav);
 
         document.querySelectorAll('.nav-menu a').forEach(link => {
-            if (link.id !== 'nav-about-link' && link.id !== 'contact-link') {
+            if (link.id !== 'nav-about-link' && link.id !== 'nav-contact-link') {
                 link.addEventListener('click', () => {
                     closeNavImmediately();
                 });
@@ -79,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutModal.classList.add('active');
             document.body.classList.add('about-open');
             
-            // Instantly hide nav behind modal without playing nav transition flicker
             setTimeout(() => {
                 closeNavImmediately();
             }, 300);
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. CONTACT MODAL FUNCTIONALITY
     // ==========================================
     const contactModal = document.getElementById('contact-modal');
-    const contactLink = document.getElementById('contact-link');
+    const contactLink = document.getElementById('nav-contact-link');
     const footerContactLink = document.getElementById('footer-contact-link');
     const closeContactBtn = document.querySelector('.contact-close-btn');
 
@@ -122,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             contactModal.classList.add('active');
             document.body.classList.add('about-open'); 
 
-            // Instantly hide nav behind modal without playing nav transition flicker
             setTimeout(() => {
                 closeNavImmediately();
             }, 300);
@@ -285,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (e.key === 'ArrowRight') {
             showImage(currentIndex + 1, -1);
         } else if (e.key === 'ArrowLeft') {
-            showImage(currentIndex - 1, 1);
+            showImage(currentIndex - 1, -1);
         }
     });
 
