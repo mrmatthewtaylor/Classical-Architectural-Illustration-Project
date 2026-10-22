@@ -128,3 +128,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('nav a[href^="#"], footer a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        
+        // Skip for modal triggers like #contact-modal
+        if (targetId === '#contact-modal' || targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            e.preventDefault();
+            
+            // Get header height to prevent section content from hiding behind sticky/fixed headers
+            const headerHeight = document.querySelector('header').offsetHeight || 0;
+            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
