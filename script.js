@@ -1,3 +1,27 @@
+// Page Transition Effect on Link Clicks
+document.addEventListener('DOMContentLoaded', () => {
+    const internalLinks = document.querySelectorAll('a');
+
+    internalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+
+            if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || this.target === '_blank') {
+                return;
+            }
+
+            if (href.endsWith('.html') || href.includes('.html#')) {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 400);
+            }
+        });
+    });
+});
+
 // Hamburger Navigation & Full Screen Overlay Toggle
 const hamburgerBtn = document.getElementById('hamburger-btn');
 const navMenu = document.getElementById('nav-menu');
@@ -134,7 +158,7 @@ if (backToTopBtn) {
     });
 }
 
-// Contact Modal Functionality
+// Contact Modal Functionality (Updated to lock body scroll when open)
 document.addEventListener('DOMContentLoaded', () => {
     const contactModal = document.getElementById('contact-modal');
     const contactLink = document.getElementById('contact-link');
@@ -143,11 +167,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openContactModal(e) {
         if (e) e.preventDefault();
-        if (contactModal) contactModal.classList.add('active');
+        if (contactModal) {
+            contactModal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
     }
 
     function closeContactModal() {
-        if (contactModal) contactModal.classList.remove('active');
+        if (contactModal) {
+            contactModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
     }
 
     if (contactLink) {

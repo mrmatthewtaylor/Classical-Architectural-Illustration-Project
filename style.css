@@ -16,10 +16,19 @@ body {
     background-attachment: fixed;
     
     color: #212529;
+    
+    /* Page Transition Fade Effect */
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+body.fade-out {
+    opacity: 0;
 }
 
 body.lightbox-open,
-body.nav-open {
+body.nav-open,
+body.modal-open {
     overflow: hidden;
 }
 
@@ -92,9 +101,9 @@ header {
     z-index: 2000;
     
     background-image: url('images/bg-img1.jpg');
-    background-repeat: repeat;
-    background-position: center top;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     
     display: flex;
     flex-direction: column;
@@ -285,7 +294,6 @@ nav a.active-link {
         box-sizing: border-box; 
     }
 
-    /* Increased image size on mobile screens by giving it a taller aspect ratio */
     .project-img {
         aspect-ratio: 4 / 3; 
     }
@@ -462,7 +470,7 @@ footer {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(2px);
     justify-content: center;
     align-items: center;
 }
@@ -472,13 +480,17 @@ footer {
 }
 
 .contact-modal-content {
-    background-color: #ffffff;
-    padding: 2.5rem;
-    border-radius: 8px;
+    background-image: url('images/bg-img1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 5rem 4rem;
+    border-radius: 4px;
     max-width: 450px;
     width: 90%;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #212529;
 }
 
 .contact-close-btn {
@@ -486,23 +498,26 @@ footer {
     top: 1rem;
     right: 1.25rem;
     font-size: 1.8rem;
-    font-weight: bold;
+    font-weight: 300;
     cursor: pointer;
-    color: #666;
+    color: #495057;
 }
 
 .contact-close-btn:hover {
-    color: #000;
+    color: #000000;
 }
 
 .contact-modal-content h2 {
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #212529;
 }
 
 .contact-subtitle {
-    color: #666;
+    color: #6c757d;
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
 }
@@ -510,7 +525,7 @@ footer {
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .contact-item {
@@ -520,14 +535,19 @@ footer {
 }
 
 .contact-item strong {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #888;
-    margin-bottom: 0.25rem;
+    letter-spacing: 0.08em;
+    color: #495057;
+    margin-bottom: 0.2rem;
 }
 
-.contact-item a {
-    color: #000;
+.contact-item a, 
+.contact-item span {
+    color: #212529;
     text-decoration: underline;
+}
+
+.contact-item span {
+    text-decoration: none;
 }
