@@ -10,10 +10,20 @@
 
     <!-- Header / Navigation -->
     <header>
-        <div class="logo">MATTHEW TAYLOR</div>
-        <nav>
-            <a href="#projects">Projects</a>
-            <a href="#about">About</a>
+        <div class="logo"><a href="index.html" class="logo-link">MATTHEW TAYLOR</a></div>
+        
+        <!-- Hamburger Icon -->
+        <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <!-- Full Screen Nav Overlay -->
+        <nav class="nav-menu" id="nav-menu">
+            <a href="index.html#projects">Projects</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="index.html#about">About</a>
             <a href="#contact-modal" id="contact-link">Contact</a>
         </nav>
     </header>
@@ -59,7 +69,7 @@
                 <p>Floral Volutes, Egg-and-Dart Echinus & Attic Base Study</p>
             </div>
 
-         <div class="project-card">
+            <div class="project-card">
                 <img src="images/img11.png" alt="Isometric Vernacular Timber-Framed Building" class="project-img">
                 <h3>Tudor Vernacular Structure Study</h3>
                 <p>Half-Timbering, Triple Gables & Masonry Base Study</p>
@@ -69,25 +79,25 @@
     </section>
 
     <!-- About Section -->
-<section id="about" class="about-section">
-    <h2>About the Project</h2>
-    
-    <p class="about-lead">
-        This illustration series explores classical architectural language and craftsmanship through the concept of <strong>spoliation</strong>—reimagining historical elements like Mannerist volutes and Renaissance pediments in new digital compositions.
-    </p>
+    <section id="about" class="about-section">
+        <h2>About the Project</h2>
+        
+        <p class="about-lead">
+            This illustration series explores classical architectural language and craftsmanship through the concept of <strong>spoliation</strong>—reimagining historical elements like Mannerist volutes and Renaissance pediments in new digital compositions.
+        </p>
 
-    <p>
-        By combining disparate motifs through precise draftsmanship, proportion, and geometry, the project honors traditional architectural syntax while expanding its creative boundaries beyond rigid replication.
-    </p>
+        <p>
+            By combining disparate motifs through precise draftsmanship, proportion, and geometry, the project honors traditional architectural syntax while expanding its creative boundaries beyond rigid replication.
+        </p>
 
-    <p>
-        The primary objective of this work is to study and celebrate traditional architectural syntax while pushing beyond rigid historical replication. By analyzing how disparate motifs interact when unified through precise draftsmanship, proportion, and geometry, these illustrations seek to honor traditional craftsmanship while opening up new creative possibilities within classical design.
-    </p>
+        <p>
+            The primary objective of this work is to study and celebrate traditional architectural syntax while pushing beyond rigid historical replication. By analyzing how disparate motifs interact when unified through precise draftsmanship, proportion, and geometry, these illustrations seek to honor traditional craftsmanship while opening up new creative possibilities within classical design.
+        </p>
 
-   <p>All illustrations in this project are 100% human-created. No artificial intelligence was used to generate or synthesize any visual content.</p>
-</section>
+        <p>All illustrations in this project are 100% human-created. No artificial intelligence was used to generate or synthesize any visual content.</p>
+    </section>
 
-<!-- Contact Popup Modal -->
+    <!-- Contact Popup Modal -->
     <div id="contact-modal" class="contact-modal">
         <div class="contact-modal-content">
             <span class="contact-close-btn">&times;</span>
@@ -97,7 +107,7 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <strong>Email:</strong>
-                    <a href="mailto:matthew@example.com">mrmatthewtaylor@protonmail.com</a>
+                    <a href="mailto:mrmatthewtaylor@protonmail.com">mrmatthewtaylor@protonmail.com</a>
                 </div>
                 <div class="contact-item">
                     <strong>Location:</strong>
@@ -107,21 +117,24 @@
         </div>
     </div>
 
-    <!-- Footer / Contact -->
+    <!-- Footer -->
     <footer id="contact">
         <p>&copy; 2026 Matthew Taylor. All rights reserved.</p>
     </footer>
     
-    <!-- Lightbox Modal for Enlarging Images -->
+    <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
         <span class="close-btn">&times;</span>
         <span class="nav-btn prev-btn">&#10094;</span>
         <div class="lightbox-content">
             <img class="lightbox-img" id="lightbox-img" alt="Enlarged project view">
-            <p id="lightbox-title"></p> <!-- Added title container -->
+            <p id="lightbox-title"></p>
         </div>
         <span class="nav-btn next-btn">&#10095;</span>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">&#8679;</button>
 
     <script src="script.js"></script>
 

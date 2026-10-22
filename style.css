@@ -10,17 +10,17 @@ body {
     font-size: 17px;
     line-height: 1.7;
     
-    /* Set path to your muted background image */
     background-image: url('images/bg-img1.jpg'); 
-    background-repeat: repeat;       /* Tiles the pattern seamlessly across the page */
-    background-position: center top; /* Centers the pattern starting from the top */
-    background-attachment: fixed;   /* Keeps the pattern stationary while scrolling */
+    background-repeat: repeat;
+    background-position: center top;
+    background-attachment: fixed;
     
     color: #212529;
 }
 
-body.lightbox-open {
-    overflow: hidden;
+body.lightbox-open,
+body.nav-open {
+    overflow: hidden; /* Lock page scrolling when lightbox or menu is open */
 }
 
 /* Header & Navigation */
@@ -31,56 +31,130 @@ header {
     padding: 20px 8%;
     background-color: #ffffff;
     border-bottom: 1px solid #e9ecef;
+    position: relative;
+    z-index: 1000;
 }
 
-.logo {
+.logo-link {
+    text-decoration: none;
+    color: #212529;
     font-weight: 700;
     letter-spacing: 2px;
     font-size: 1.1rem;
 }
 
-nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #495057;
-    font-size: 0.95rem;
+/* Hamburger Toggle Button (Fixed Z-Index above Full Screen Overlay) */
+.hamburger-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2001; /* Above full-screen menu overlay */
+    position: relative;
 }
 
-nav a:hover {
-    color: #000000;
+.hamburger-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #212529;
+    border-radius: 2px;
+    transition: transform 0.4s ease, opacity 0.3s ease, background-color 0.3s ease;
 }
 
-@media (max-width: 600px) {
-    header {
-        flex-direction: column; /* Stacks your name on top of the navigation */
-        gap: 15px;              /* Adds clean spacing between name and links */
-        padding: 15px 5%;       /* Adjusts side padding for mobile viewports */
-    }
+/* Hamburger Active / Open State Animation */
+.hamburger-toggle.active .bar {
+    background-color: #212529;
+}
 
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 15px;              /* Spreads out the nav links evenly */
-    }
+.hamburger-toggle.active .bar:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
 
-    nav a {
-        margin-left: 0;         /* Clears out the desktop left-margin */
-        font-size: 0.9rem;      /* Slight scale down for compact screens */
-    }
+.hamburger-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
 
-    .hero h1 {
-        font-size: 1.75rem;     /* Reduced main title size on mobile */
-    }
+.hamburger-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Full-Screen Flowing Navigation Overlay */
+.nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000;
     
-    .hero p {
-        font-size: 1.05rem;     /* Reduced tagline size on mobile */
-    }
+    /* Site Background Texture Overlay */
+    background-image: url('images/bg-img1.jpg');
+    background-repeat: repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    
+    /* Smooth Flowing Full-Screen Reveal Transition */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                visibility 0.5s ease;
+}
+
+/* Flowing Menu Link Animations */
+.nav-menu a {
+    text-decoration: none;
+    color: #212529;
+    font-size: 2.2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    
+    /* Staggered Flow Animation setup */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Active Full-Screen State */
+.nav-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-menu.active a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered Link Transitions */
+.nav-menu.active a:nth-child(1) { transition-delay: 0.15s; }
+.nav-menu.active a:nth-child(2) { transition-delay: 0.25s; }
+.nav-menu.active a:nth-child(3) { transition-delay: 0.35s; }
+.nav-menu.active a:nth-child(4) { transition-delay: 0.45s; }
+
+nav a.active-link {
+    font-weight: 600;
+    border-bottom: 2px solid #212529;
 }
 
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 20px 10px 30px 10px;
+    padding: 30px 10px 40px 10px;
     background-color: rgba(255, 255, 255, 0.5);
     border-bottom: 1px solid #e1e1e1;
 }
@@ -92,7 +166,6 @@ nav a:hover {
     margin-bottom: 10px;
 }
 
-
 .hero p {
     font-size: 1.25rem;
     color: #6c757d;
@@ -100,11 +173,16 @@ nav a:hover {
 
 @media (max-width: 600px) {
     .hero h1 {
-        font-size: 1.75rem; /* Reduced main title size */
+        font-size: 1.75rem;
     }
     
     .hero p {
-        font-size: 1rem; /* Reduced tagline size for mobile screens */
+        font-size: 1rem;
+    }
+
+    .nav-menu a {
+        font-size: 1.6rem; /* Scaled down for smaller phones */
+        gap: 20px;
     }
 }
 
@@ -112,7 +190,7 @@ nav a:hover {
 .projects {
     padding: 30px 8% 8% 8%;
     border-top: 1px solid #e9ecef;
-   background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .projects h2 {
@@ -147,6 +225,41 @@ nav a:hover {
     font-size: 0.98rem;
 }
 
+/* Gallery Section */
+.gallery-section {
+    padding: 30px 8% 8% 8%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.gallery-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gallery-card-info h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #212529;
+    margin-bottom: 5px;
+}
+
+.gallery-card-info p {
+    color: #6c757d;
+    font-size: 0.98rem;
+}
+
 /* Responsive Image Styling */
 .project-img {
     width: 100%;
@@ -159,28 +272,23 @@ nav a:hover {
     margin-bottom: 15px;
     border-radius: 2px;
     cursor: pointer;
-    transition: transform 0.2s ease;
     box-sizing: border-box;
 }
 
-.project-img:hover {
-    transform: scale(1.02);
-}
-
 @media (min-width: 992px) {
-    .project-grid {
+    .project-grid, .gallery-grid {
         grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
         gap: 40px;
     }
 }
 
 @media (max-width: 600px) {
-    .project-grid {
+    .project-grid, .gallery-grid {
         grid-template-columns: 1fr; 
         gap: 20px;
     }
 
-    .project-card {
+    .project-card, .gallery-card {
         width: 100%;
         box-sizing: border-box; 
     }
@@ -198,7 +306,6 @@ nav a:hover {
     background-color: rgba(10, 25, 47, 0.85); 
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 4px;
- 
 }
 
 .about-section h2 {
@@ -217,7 +324,6 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
-/* Base styles for desktop and larger screens */
 .about-section p {
     font-size: 1.1rem;
     line-height: 1.75;
@@ -225,11 +331,10 @@ nav a:hover {
     margin-bottom: 16px;
 }
 
-/* Styles for mobile screens (devices up to 768px wide) */
 @media (max-width: 768px) {
     .about-section p {
-        font-size: 0.9rem; /* Reduced font size for mobile */
-        line-height: 1.6;   /* Slightly tighter line-height for smaller screens */
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
 }
 
@@ -249,7 +354,7 @@ footer {
 /* Lightbox Styles */
 .lightbox {
     position: fixed;
-    z-index: 1000;
+    z-index: 3000;
     top: 0;
     left: 0;
     width: 100%;
@@ -290,15 +395,13 @@ footer {
     font-size: 40px;
     font-weight: 300;
     cursor: pointer;
-    transition: color 0.2s;
-    z-index: 1001;
+    z-index: 3001;
 }
 
 .close-btn:hover {
     color: #adb5bd;
 }
 
-/* Lightbox Navigation Arrows */
 .nav-btn {
     position: absolute;
     top: 50%;
@@ -309,12 +412,11 @@ footer {
     cursor: pointer;
     padding: 20px;
     user-select: none;
-    transition: color 0.2s;
-    z-index: 1001;
+    z-index: 3001;
 }
 
 .nav-btn:hover {
-    color: #adb5bd;
+    color: #ffffff;
 }
 
 .prev-btn {
@@ -325,11 +427,43 @@ footer {
     right: 30px;
 }
 
+/* Back to Top Button Styles (Circular) */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background-color: #212529;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: #495057;
+}
+
 /* Contact Modal Styles */
 .contact-modal {
     display: none;
     position: fixed;
-    z-index: 2000;
+    z-index: 4000;
     top: 0;
     left: 0;
     width: 100%;
@@ -352,18 +486,6 @@ footer {
     width: 90%;
     position: relative;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: modalFadeIn 0.3s ease;
-}
-
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .contact-close-btn {
@@ -374,7 +496,6 @@ footer {
     font-weight: bold;
     cursor: pointer;
     color: #666;
-    transition: color 0.2s;
 }
 
 .contact-close-btn:hover {
