@@ -28,7 +28,8 @@ body.fade-out {
 
 body.lightbox-open,
 body.nav-open,
-body.modal-open {
+body.modal-open,
+body.about-open {
     overflow: hidden;
 }
 
@@ -63,7 +64,7 @@ header {
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 2001;
+    z-index: 3000;
     position: relative;
 }
 
@@ -299,48 +300,134 @@ nav a.active-link {
     }
 }
 
-/* About Section */
-.about-section {
-    max-width: 850px;
-    margin: 40px auto;
-    padding: 35px;
-    background-color: rgba(10, 25, 47, 0.85); 
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
+/* Shared Full-Screen Modal Overlays (About & Contact matching Nav transition) */
+.full-screen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2500; /* Placed above nav-menu (2000) so it covers seamlessly */
+    
+    background-image: url('images/bg-img1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    overflow-y: auto;
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                visibility 0.5s ease;
 }
 
-.about-section h2 {
-    font-size: 1.7rem;
-    color: #f8f9fa;
+.full-screen-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.modal-content {
+    max-width: 850px;
+    width: 100%;
+    margin: auto;
+    color: #212529;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    color: #212529;
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     padding-bottom: 10px;
     letter-spacing: 0.5px;
+    font-weight: 400;
 }
 
 .about-lead {
     font-size: 1.15rem;
     line-height: 1.7;
-    color: #e9ecef;
+    color: #212529;
     margin-bottom: 20px;
 }
 
-.about-section p {
+.modal-content p {
     font-size: 1.1rem;
     line-height: 1.75;
-    color: #ced4da;
+    color: #495057;
     margin-bottom: 16px;
 }
 
 @media (max-width: 768px) {
-    .about-section p {
-        font-size: 0.9rem;
+    .modal-content p {
+        font-size: 0.95rem;
         line-height: 1.6;
     }
 }
 
-.about-section strong {
-    color: #ffffff;
+.modal-content strong {
+    color: #212529;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    background: transparent;
+    border: none;
+    color: #212529;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 2501;
+}
+
+.modal-close-btn:hover {
+    color: #6c757d;
+}
+
+/* Specific Contact Modal Styles matching Plain Text design */
+.contact-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+}
+
+.contact-item strong {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6c757d;
+    margin-bottom: 0.3rem;
+}
+
+.contact-item a, 
+.contact-item span {
+    color: #212529;
+    text-decoration: underline;
+}
+
+.contact-item span {
+    text-decoration: none;
 }
 
 /* Footer */
@@ -355,12 +442,14 @@ footer {
 /* Lightbox Styles */
 .lightbox {
     position: fixed;
-    z-index: 3000;
+    z-index: 3500;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); 
+    background-color: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -403,7 +492,7 @@ footer {
     font-size: 40px;
     font-weight: 300;
     cursor: pointer;
-    z-index: 3001;
+    z-index: 3501;
 }
 
 .close-btn:hover {
@@ -420,7 +509,7 @@ footer {
     cursor: pointer;
     padding: 20px;
     user-select: none;
-    z-index: 3001;
+    z-index: 3501;
 }
 
 .nav-btn:hover {
@@ -472,96 +561,4 @@ footer {
 
 .back-to-top:hover {
     background-color: #495057;
-}
-
-/* Contact Modal Styles */
-.contact-modal {
-    display: none;
-    position: fixed;
-    z-index: 4000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(6px);
-    justify-content: center;
-    align-items: center;
-}
-
-.contact-modal.active {
-    display: flex;
-}
-
-.contact-modal-content {
-    background-image: url('images/bg-img1.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    padding: 5rem 4rem;
-    border-radius: 4px;
-    max-width: 450px;
-    width: 90%;
-    position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    color: #212529;
-}
-
-.contact-close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1.25rem;
-    font-size: 1.8rem;
-    font-weight: 300;
-    cursor: pointer;
-    color: #495057;
-}
-
-.contact-close-btn:hover {
-    color: #000000;
-}
-
-.contact-modal-content h2 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1.75rem;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    color: #212529;
-}
-
-.contact-subtitle {
-    color: #6c757d;
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.contact-item {
-    display: flex;
-    flex-direction: column;
-    font-size: 1rem;
-}
-
-.contact-item strong {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #495057;
-    margin-bottom: 0.2rem;
-}
-
-.contact-item a, 
-.contact-item span {
-    color: #212529;
-    text-decoration: underline;
-}
-
-.contact-item span {
-    text-decoration: none;
 }

@@ -8,26 +8,6 @@
 </head>
 <body>
 
-    <!-- Header / Navigation -->
-    <!-- <header>
-        <div class="logo"><a href="/" class="logo-link">MATTHEW TAYLOR</a></div> -->
-        
-        <!-- Hamburger Icon -->
-        <!-- <button class="hamburger-toggle" id="hamburger-btn" aria-label="Toggle navigation">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button> -->
-
-        <!-- Full Screen Nav Overlay -->
-        <!-- <nav class="nav-menu" id="nav-menu">
-            <a href="/" class="active-link">Illustration</a>
-            <a href="/gallery">Gallery</a>
-            <a href="/#about">About</a>
-            <a href="#contact-modal" id="contact-link">Contact</a>
-        </nav>
-    </header> -->
-
     <div id="header-container"></div>
 
     <!-- Hero Section -->
@@ -80,29 +60,32 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <h2>About the Project</h2>
-        
-        <p class="about-lead">
-            This illustration series explores classical architectural language and craftsmanship through the concept of <strong>spoliation</strong>—reimagining historical elements like Mannerist volutes and Renaissance pediments in new digital compositions.
-        </p>
+    <!-- About Modal Overlay -->
+    <div id="about-modal" class="full-screen-modal">
+        <button class="modal-close-btn about-close-btn" aria-label="Close about modal">&times;</button>
+        <div class="modal-content">
+            <h2>About the Project</h2>
+            
+            <p class="about-lead">
+                This illustration series explores classical architectural language and craftsmanship through the concept of <strong>spoliation</strong>—reimagining historical elements like Mannerist volutes and Renaissance pediments in new digital compositions.
+            </p>
 
-        <p>
-            By combining disparate motifs through precise draftsmanship, proportion, and geometry, the project honors traditional architectural syntax while expanding its creative boundaries beyond rigid replication.
-        </p>
+            <p>
+                By combining disparate motifs through precise draftsmanship, proportion, and geometry, the project honors traditional architectural syntax while expanding its creative boundaries beyond rigid replication.
+            </p>
 
-        <p>
-            The primary objective of this work is to study and celebrate traditional architectural syntax while pushing beyond rigid historical replication. By analyzing how disparate motifs interact when unified through precise draftsmanship, proportion, and geometry, these illustrations seek to honor traditional craftsmanship while opening up new creative possibilities within classical design.
-        </p>
+            <p>
+                The primary objective of this work is to study and celebrate traditional architectural syntax while pushing beyond rigid historical replication. By analyzing how disparate motifs interact when unified through precise draftsmanship, proportion, and geometry, these illustrations seek to honor traditional craftsmanship while opening up new creative possibilities within classical design.
+            </p>
 
-        <p>All illustrations in this project are 100% human-created. No artificial intelligence was used to generate or synthesize any visual content.</p>
-    </section>
+            <p>All illustrations in this project are 100% human-created. No artificial intelligence was used to generate or synthesize any visual content.</p>
+        </div>
+    </div>
 
-    <!-- Contact Popup Modal -->
-    <div id="contact-modal" class="contact-modal">
-        <div class="contact-modal-content">
-            <span class="contact-close-btn">&times;</span>
+    <!-- Contact Full-Screen Modal -->
+    <div id="contact-modal" class="full-screen-modal">
+        <button class="modal-close-btn contact-close-btn" aria-label="Close contact modal">&times;</button>
+        <div class="modal-content">
             <h2>Get in Touch</h2>
             <p class="contact-subtitle">For commissions, inquiries, or collaboration opportunities:</p>
             

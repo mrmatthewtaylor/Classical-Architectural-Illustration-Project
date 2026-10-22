@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const headerContainer = document.getElementById('header-container');
     if (headerContainer) {
-        // Check if we are currently inside the gallery directory/page
         const path = window.location.pathname;
         const isGallery = path.includes('gallery') || path.includes('index.html');
         
         const homePath = isGallery ? '../' : '/';
         const galleryPath = isGallery ? '/' : 'gallery/';
-        const aboutPath = isGallery ? '../#about' : '#about';
+        const aboutPath = '#about'; 
+        const contactPath = '#contact-modal';
 
         headerContainer.innerHTML = `
             <header>
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <nav class="nav-menu" id="nav-menu">
                     <a href="${homePath}" class="${!isGallery ? 'active-link' : ''}">Illustration</a>
                     <a href="${galleryPath}" class="${isGallery ? 'active-link' : ''}">Gallery</a>
-                    <a href="${aboutPath}">About</a>
-                    <a href="#contact-modal" id="contact-link">Contact</a>
+                    <a href="${aboutPath}" id="nav-about-link">About</a>
+                    <a href="${contactPath}" id="contact-link">Contact</a>
                 </nav>
             </header>
         `;
@@ -39,6 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navMenu = document.getElementById('nav-menu');
 
+    function closeNavImmediately() {
+        if (hamburgerBtn && navMenu) {
+            hamburgerBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('nav-open');
+        }
+    }
+
     if (hamburgerBtn && navMenu) {
         function toggleNav() {
             hamburgerBtn.classList.toggle('active');
@@ -46,23 +54,61 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('nav-open');
         }
 
-        function closeNav() {
-            hamburgerBtn.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.classList.remove('nav-open');
-        }
-
         hamburgerBtn.addEventListener('click', toggleNav);
 
         document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                closeNav();
-            });
+            if (link.id !== 'nav-about-link' && link.id !== 'contact-link') {
+                link.addEventListener('click', () => {
+                    closeNavImmediately();
+                });
+            }
         });
     }
 
     // ==========================================
-    // 3. CONTACT MODAL FUNCTIONALITY
+    // 3. ABOUT MODAL FUNCTIONALITY
+    // ==========================================
+    const aboutModal = document.getElementById('about-modal');
+    const navAboutLink = document.getElementById('nav-about-link');
+    const closeAboutBtn = document.querySelector('.about-close-btn');
+
+    function openAboutModal(e) {
+        if (e) e.preventDefault();
+        
+        if (aboutModal) {
+            aboutModal.classList.add('active');
+            document.body.classList.add('about-open');
+            
+            // Instantly hide nav behind modal without playing nav transition flicker
+            setTimeout(() => {
+                closeNavImmediately();
+            }, 300);
+        }
+    }
+
+    function closeAboutModal() {
+        if (aboutModal) {
+            aboutModal.classList.remove('active');
+            document.body.classList.remove('about-open');
+        }
+    }
+
+    if (navAboutLink) {
+        navAboutLink.addEventListener('click', openAboutModal);
+    }
+
+    if (closeAboutBtn) {
+        closeAboutBtn.addEventListener('click', closeAboutModal);
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && aboutModal && aboutModal.classList.contains('active')) {
+            closeAboutModal();
+        }
+    });
+
+    // ==========================================
+    // 4. CONTACT MODAL FUNCTIONALITY
     // ==========================================
     const contactModal = document.getElementById('contact-modal');
     const contactLink = document.getElementById('contact-link');
@@ -71,16 +117,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openContactModal(e) {
         if (e) e.preventDefault();
+        
         if (contactModal) {
             contactModal.classList.add('active');
-            document.body.classList.add('modal-open');
+            document.body.classList.add('about-open'); 
+
+            // Instantly hide nav behind modal without playing nav transition flicker
+            setTimeout(() => {
+                closeNavImmediately();
+            }, 300);
         }
     }
 
     function closeContactModal() {
         if (contactModal) {
             contactModal.classList.remove('active');
-            document.body.classList.remove('modal-open');
+            document.body.classList.remove('about-open');
         }
     }
 
@@ -96,12 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closeContactBtn.addEventListener('click', closeContactModal);
     }
 
-    window.addEventListener('click', (e) => {
-        if (e.target === contactModal) {
-            closeContactModal();
-        }
-    });
-
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && contactModal && contactModal.classList.contains('active')) {
             closeContactModal();
@@ -109,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 4. LIGHTBOX FUNCTIONALITY (WITH SWIPE & ANIMATION)
+    // 5. LIGHTBOX FUNCTIONALITY (WITH SWIPE & ANIMATION)
     // ==========================================
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.querySelector('.lightbox-content');
@@ -122,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentIndex = 0;
 
-    // Touch swipe coordinates
     let touchStartX = 0;
     let touchEndX = 0;
     const minSwipeDistance = 50; 
@@ -131,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (projectImages.length === 0) return;
 
         if (direction !== 0 && lightboxContent) {
-            // FIXED: Added proper parentheses around direction * 50 to compute px correctly
             lightboxContent.style.transform = `translateX(${direction * 50}px)`;
             lightboxContent.style.opacity = '0';
 
@@ -139,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateImageSource(index);
                 lightboxContent.style.transform = `translateX(${-direction * 50}px)`;
                 
-                // Force reflow
                 void lightboxContent.offsetWidth;
 
                 lightboxContent.style.transform = 'translateX(0)';
@@ -190,14 +233,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nextBtn) {
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            showImage(currentIndex + 1, -1); // Slide left
+            showImage(currentIndex + 1, -1);
         });
     }
 
     if (prevBtn) {
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            showImage(currentIndex - 1, 1); // Slide right
+            showImage(currentIndex - 1, 1);
         });
     }
 
@@ -227,12 +270,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleSwipe() {
         const swipeDistance = touchEndX - touchStartX;
 
-        // Swipe Left -> Next Image (Slide left: direction -1)
         if (swipeDistance < -minSwipeDistance) {
             showImage(currentIndex + 1, -1);
-        } 
-        // Swipe Right -> Previous Image (Slide right: direction 1)
-        else if (swipeDistance > minSwipeDistance) {
+        } else if (swipeDistance > minSwipeDistance) {
             showImage(currentIndex - 1, 1);
         }
     }
@@ -250,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 5. BACK TO TOP BUTTON
+    // 6. BACK TO TOP BUTTON
     // ==========================================
     const backToTopBtn = document.getElementById('back-to-top');
 
@@ -272,35 +312,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 6. SMOOTH SCROLLING FOR ANCHORS
+    // 7. SMOOTH SCROLLING FOR ANCHORS
     // ==========================================
     document.querySelectorAll('nav a[href*="#"], footer a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             
-            if (href === '#contact-modal' || href === '#') return;
-
-            if (href.includes('.html#')) {
-                const parts = href.split('#');
-                const targetPage = parts[0];
-                const targetId = '#' + parts[1];
-                
-                if (window.location.pathname.endsWith(targetPage) || window.location.pathname.endsWith('/' + targetPage)) {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        e.preventDefault();
-                        const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                        const offsetPosition = elementPosition - headerHeight;
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-                return;
-            }
+            if (href === '#contact-modal' || href === '#' || href === '#about') return;
 
             const targetElement = document.querySelector(href);
             if (targetElement) {
