@@ -429,6 +429,12 @@ footer {
     right: 30px;
 }
 
+@media (max-width: 600px) {
+    .nav-btn {
+        display: none !important;
+    }
+}
+
 /* Back to Top Button Styles */
 .back-to-top {
     position: fixed;

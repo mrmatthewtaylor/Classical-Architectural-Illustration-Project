@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 4. LIGHTBOX FUNCTIONALITY
+    // 4. LIGHTBOX FUNCTIONALITY (WITH SWIPE SUPPORT)
     // ==========================================
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -120,6 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectImages = document.querySelectorAll('.project-img');
 
     let currentIndex = 0;
+
+    // Touch swipe coordinates
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 50; // Minimum distance in pixels needed to qualify as a swipe
 
     function showImage(index) {
         if (projectImages.length === 0) return;
@@ -186,6 +191,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeLightbox();
             }
         });
+
+        // Touch event listeners for swiping left/right
+        lightbox.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            handleSwipe();
+        }, { passive: true });
+    }
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+
+        // Swipe Left -> Next Image
+        if (swipeDistance < -minSwipeDistance) {
+            showImage(currentIndex + 1);
+        } 
+        // Swipe Right -> Previous Image
+        else if (swipeDistance > minSwipeDistance) {
+            showImage(currentIndex - 1);
+        }
     }
 
     document.addEventListener('keydown', (e) => {
