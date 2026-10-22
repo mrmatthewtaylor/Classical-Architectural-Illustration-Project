@@ -16,7 +16,6 @@ body {
     background-attachment: fixed;
     
     color: #212529;
-    
     opacity: 1;
     transition: opacity 0.4s ease-in-out;
 }
@@ -299,7 +298,7 @@ nav a.active-link {
     }
 }
 
-/* Shared Full-Screen Modal Overlays */
+/* Shared Full-Screen Modal Overlays (About & Contact) */
 .full-screen-modal {
     position: fixed;
     top: 0;

@@ -100,12 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closeAboutBtn.addEventListener('click', closeAboutModal);
     }
 
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && aboutModal && aboutModal.classList.contains('active')) {
-            closeAboutModal();
-        }
-    });
-
     // ==========================================
     // 4. CONTACT MODAL FUNCTIONALITY
     // ==========================================
@@ -146,9 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
         closeContactBtn.addEventListener('click', closeContactModal);
     }
 
+    // Unified Escape key listener for modals and lightbox
     window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && contactModal && contactModal.classList.contains('active')) {
-            closeContactModal();
+        if (e.key === 'Escape') {
+            if (aboutModal && aboutModal.classList.contains('active')) closeAboutModal();
+            if (contactModal && contactModal.classList.contains('active')) closeContactModal();
+            if (lightbox && lightbox.classList.contains('active')) closeLightbox();
         }
     });
 
@@ -278,9 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (!lightbox || !lightbox.classList.contains('active')) return;
 
-        if (e.key === 'Escape') {
-            closeLightbox();
-        } else if (e.key === 'ArrowRight') {
+        if (e.key === 'ArrowRight') {
             showImage(currentIndex + 1, -1);
         } else if (e.key === 'ArrowLeft') {
             showImage(currentIndex - 1, -1);
